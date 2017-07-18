@@ -1,0 +1,19 @@
+.wrapper {
+  margin-left: 200px;
+}
+.content {
+  float: right;
+  width: 100%;
+  background-color: #CCF;
+  border: 2px darkgrey dashed;
+}
+.sidebar {
+  float: left;
+  width: 200px;
+  margin-left: -200px;
+  background-color: #FFA;
+  /*border: 2px darkgrey solid;*/
+}
+.cleared {
+  clear: both;
+}
