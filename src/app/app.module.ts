@@ -7,6 +7,7 @@ import {StoreModule} from "@ngrx/store";
 import {freelancersReducer} from "./freelancer-grid/freelancer-reducer";
 import {FreelancerService} from "./freelancer.service";
 import {HttpModule} from "@angular/http";
+import { FormBuilderGridComponent } from './form-builder-grid/form-builder-grid.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {HttpModule} from "@angular/http";
   ],
   declarations: [
     AppComponent,
-    FreelancerGridComponent
+    FreelancerGridComponent,
+    FormBuilderGridComponent
   ],
   bootstrap: [AppComponent],
   providers: [ FreelancerService ],
