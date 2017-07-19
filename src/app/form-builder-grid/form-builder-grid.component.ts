@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'form-builder-grid',
+  selector: 'app-form-builder-grid',
   templateUrl: './form-builder-grid.component.html',
   styleUrls: ['./form-builder-grid.component.css']
 })
@@ -12,10 +12,14 @@ export class FormBuilderGridComponent implements OnInit {
   ngOnInit() {
   }
 
+  emptyContainer() : boolean {
+    return true;
+  }
+
 
   sidebarOptions: any = {
     accepts: function (el, target, source, sibling) {
-      return target.id == "form_builder_container" && source.id == "sidebar_container";
+      return ( target.id == "form_builder_container_empty" || target.id == "form_builder_container" ) && source.id == "sidebar_container";
     },
     copy: true
   }

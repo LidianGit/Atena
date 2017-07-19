@@ -9,6 +9,7 @@ import {FreelancerService} from "./freelancer.service";
 import {HttpModule} from "@angular/http";
 import { FormBuilderGridComponent } from './form-builder-grid/form-builder-grid.component';
 import {DragulaModule} from "ng2-dragula";
+import { FormComponentMenuComponent } from './form-component-menu/form-component-menu.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {DragulaModule} from "ng2-dragula";
   declarations: [
     AppComponent,
     FreelancerGridComponent,
-    FormBuilderGridComponent
+    FormBuilderGridComponent,
+    FormComponentMenuComponent
   ],
   bootstrap: [AppComponent],
   providers: [ FreelancerService ],
