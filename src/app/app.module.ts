@@ -10,13 +10,15 @@ import {HttpModule} from "@angular/http";
 import { FormBuilderGridComponent } from './form-builder-grid/form-builder-grid.component';
 import {DragulaModule} from "ng2-dragula";
 import { FormComponentMenuComponent } from './form-component-menu/form-component-menu.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     StoreModule.provideStore( { freelancers: freelancersReducer} ),
     DragulaModule,
     BrowserModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,

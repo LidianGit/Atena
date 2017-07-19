@@ -6,12 +6,13 @@
       <!--<div>There's also the possibility of moving elements around in the same container, changing their position</div>-->
     <!--</div>-->
 
-    <app-form-component-menu id="sidebar_container" class='sidebar container' [dragula]='"first-bag"' [dragulaOptions]="sidebarOptions" ></app-form-component-menu>
+    <app-form-component-menu id="sidebar_container" class='sidebar container' [dragula]='"first-bag"' [dragulaOptions]="sidebarOptions"
+                             [@slideInOut]="menuState"></app-form-component-menu>
 
 
     <div class='content container'>
 
-      <div id="form_builder_container_empty" class="stageEmpty isSmall" *ngIf="emptyContainer()" [dragula]='"first-bag"' [dragulaOptions]="containerOptions" >
+      <div id="form_builder_container_empty" class="stageEmpty isSmall" (click)="toggleMenu()" *ngIf="emptyContainer()" [dragula]='"first-bag"' [dragulaOptions]="containerOptions" >
         <span name="enlarge" class="ji ji-enlarge"></span><span>Drag your first component here from the left panel.</span>
       </div>
 

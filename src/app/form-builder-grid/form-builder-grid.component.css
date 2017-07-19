@@ -1,5 +1,6 @@
 .wrapper {
-  margin-left: 200px;
+  position: relative;
+  /*margin-left: 200px;*/
   background-color: #f5f5f5;
 }
 .content {
@@ -24,6 +25,20 @@
   background-color: #FFA;
   /*border: 2px darkgrey solid;*/
   min-height: 400px;
+
+
+
+  background: #1a2580;
+  color: #fff;
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  min-width: 250px;
+  z-index: 9999;
+
 }
 .cleared {
   clear: both;
