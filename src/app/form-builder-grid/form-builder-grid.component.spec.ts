@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormBuilderGridComponent } from './form-builder-grid.component';
+import {StoreModule} from "ngrx/@ngrx/store";
 
 describe('FormBuilderGridComponent', () => {
   let component: FormBuilderGridComponent;
@@ -8,7 +9,10 @@ describe('FormBuilderGridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormBuilderGridComponent ]
+      declarations: [ FormBuilderGridComponent ],
+      imports: [
+        StoreModule.provideStore({})
+      ]
     })
     .compileComponents();
   }));

@@ -16,34 +16,40 @@
   margin-bottom: 20px;
   margin-top: 20px;
   background: #fff;
-
 }
+
 .sidebar {
-  float: left;
-  width: 200px;
+  /*float: left;*/
+  /*margin-left: -200px;*/
+  /*!*border: 2px darkgrey solid;*!*/
+  /*min-height: 400px;*/
+  /*background: #ffffff;*/
+  /*color: #fff;*/
+  /*position: absolute;*/
+  /*left: auto;*/
+  /*top: 0;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+  /*!*min-width: 250px;*!*/
+  /*z-index: 9999*/
+
+  float: right;
   margin-left: -200px;
-  background-color: #FFA;
-  /*border: 2px darkgrey solid;*/
   min-height: 400px;
-
-
-
-  background: #1a2580;
-  color: #fff;
+  background: #ffffff;
+  /* color: #fff; */
   position: absolute;
-  left: auto;
+  right: auto;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
-  width: 20%;
-  min-width: 250px;
   z-index: 9999;
-
 }
+
+
 .cleared {
   clear: both;
 }
-
 
 .stageEmpty.isSmall {
   padding: 45px 20px;

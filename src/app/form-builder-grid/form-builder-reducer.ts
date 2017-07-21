@@ -2,60 +2,51 @@
  * Created by Amumi on 14/07/2017.
  */
 import { Action } from '@ngrx/store';
+import {FormElement} from "../form-element/form-element";
 
 export interface AppState {
   formContainerState: FormContainerState;
-  componentContainerState: ComponentContainerState;
+  elementMenuState: FormElementMenuState;
 }
 
-export interface ComponentContainerState {
-  components: FormComponent;
+export interface FormElementMenuState {
+  elements: Array<FormElement>;
   hidden: boolean;
 }
 
 export interface FormContainerState {
   form: Form;
-  selectedComponent: FormComponent;
+  selectedElement: FormElement;
 }
 
 export interface Form {
-  components: FormComponent;
-}
-
-export interface FormComponent {
-  name: string;
-  mandatory: boolean;
+  elements: Array<FormElement>;
 }
 
 export const ACTIONS = {
-  COMPONENT_DROP: 'COMPONENT_DROP',
-  COMPONENT_DRAG: 'COMPONENT_DRAG',
-  COMPONENT_SELECTED: 'COMPONENT_SELECTED',
-  COMPONENT_REMOVED: 'COMPONENT_REMOVED',
+  MENU_ELEMENT_DROP: 'ELEMENT_DROP',
+  MENU_ELEMENT_DRAG: 'ELEMENT_DRAG',
+  MENU_ELEMENT_SELECTED: 'ELEMENT_SELECTED',
+  MENU_ELEMENT_REMOVED: 'ELEMENT_REMOVED',
+  CONTAINER_ELEMENT_SELECTED: 'CONTAINER_ELEMENT_SELECTED'
 };
 
-export function formBuilderReducer(state: AppState , action: Action): AppState {
-    return state;
-}
+export function formBuilderReducer(
+  // state: AppState = { elementMenuState: { elements: [], hidden: true} },
+  state: Array<FormElement> = [] ,
+  action: Action): Array<FormElement> {
+    switch (action.type) {
+        case ACTIONS.CONTAINER_ELEMENT_SELECTED:
+          let newElementMenuState = [];
+          let fe1:FormElement = { name: "Input", type: "input" };
+          let fe2:FormElement = { name: "Select", type: "select" };
+          newElementMenuState.push(fe1);
+          newElementMenuState.push(fe2);
+          // return Object.assign({}, state, {elementMenuState: newElementMenuState});
+          return newElementMenuState;
+          // return Object.assign({}, state, newElementMenuState);
 
-// export function formBuilderReducer(
-//   // state: Array<IFreelancer> = [],
-//   // action: Action): Array<IFreelancer> {
-//   // switch (action.type) {
-//   //   case ACTIONS.INCOMING_DATA:
-//   //     action.payload.DELETE.forEach((index) => {
-//   //       state.splice(state.indexOf(action.payload), 1);
-//   //     })
-//   //     return Array.prototype.concat(action.payload.ADD, state);
-//   //   case ACTIONS.FREELANCERS_LOADED:
-//   //     // Return the new state with the payload as freelancers list
-//   //     return Array.prototype.concat(action.payload);
-//   //   case ACTIONS.DELETE_FREELANCER:
-//   //     // Remove the element from the array
-//   //     state.splice(state.indexOf(action.payload), 1);
-//   //     // We need to create another reference
-//   //     return Array.prototype.concat(state);
-//   //   default:
-//   //     return state;
-//   }
-// }
+        default:
+          return state;
+    }
+}
