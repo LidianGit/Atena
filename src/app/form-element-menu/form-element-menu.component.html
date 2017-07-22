@@ -1,24 +1,11 @@
-
 <div class="fieldsPanel-header">
   <div>
     <span name="cancelNormal" class="ji ji-cancelNormal fieldsPanel-headerClose"></span>
-    <h3 class="fieldsPanel-headerText">Form Elements</h3>
+    <span class="fieldsPanel-headerText">Form Elements</span>
   </div>
-  <!--<div class="fieldsNav">-->
-    <!--<span id="fieldsNav-fields" class="fieldsNav-item isActive">Basic</span>-->
-    <!--<span id="fieldsNav-payments" class="fieldsNav-item">Payments</span>-->
-    <!--<span id="fieldsNav-widgets" class="fieldsNav-item">Widgets</span>-->
-  <!--</div>-->
 </div>
 <div id="sidebar_container"  [dragula]='"bag-items"'  [dragulaOptions]="sidebarOptions" >
   <div *ngFor="let formElement of formElementMenuState | async">
     <app-form-element [element]="formElement" ></app-form-element>
   </div>
 </div>
-
-
-<!--<div id="sidebar_container" class='sidebar container' [dragula]='"first-bag"' [dragulaOptions]="sidebarOptions">-->
-  <!--<div>You can move these elements between these two containers</div>-->
-  <!--<div>Moving them anywhere else isn't quite possible</div>-->
-  <!--<div>There's also the possibility of moving elements around in the same container, changing their position</div>-->
-<!--</div>-->

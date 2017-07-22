@@ -43,7 +43,9 @@ footer {background: #aaa; color:white;}
   height: 44px;
   top: -114px;
   /*background: linear-gradient(-60deg,#ff7513,#f09819);*/
-  background: linear-gradient(-60deg,#e413ff,#f09819);
+  /*background: linear-gradient(-60deg,#e413ff,#f09819);*/
+  /*background: linear-gradient(-60deg,#67f592,#4b50ff);*/
+  background: linear-gradient(-60deg,#4b50ff,#ff7513);
   z-index: 110;
 }
 
