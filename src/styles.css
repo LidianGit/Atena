@@ -1,1 +1,4 @@
 @import "dragula.min.css";
+.ng-sidebar__content[_ngcontent-c2]{
+  position: relative !important;
+}

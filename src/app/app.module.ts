@@ -11,11 +11,11 @@ import { FormElementMenuComponent } from './form-element-menu/form-element-menu.
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormElementComponent } from './form-element/form-element.component';
 import {formBuilderReducer} from "./form-builder-grid/form-builder-reducer";
+import {SidebarModule} from "ng-sidebar";
 
 @NgModule({
   imports: [
-
-    // StoreModule.provideStore( { freelancers: freelancersReducer} ),
+    SidebarModule.forRoot(),
     DragulaModule,
     BrowserModule,
     HttpModule,

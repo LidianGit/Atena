@@ -8,22 +8,23 @@ import {FormElement} from "../form-element/form-element";
 @Component({
   selector: 'app-form-builder-grid',
   templateUrl: './form-builder-grid.component.html',
-  styleUrls: ['./form-builder-grid.component.css'],
-  animations: [
-  trigger('slideInOut', [
-    state('in', style({
-      transform: 'translate3d(0, 0, 0)'
-    })),
-    state('out', style({
-      transform: 'translate3d(100%, 0, 0)'
-    })),
-    transition('in => out', animate('400ms ease-in-out')),
-    transition('out => in', animate('400ms ease-in-out'))
-  ])
-]
+  styleUrls: ['./form-builder-grid.component.css']
+  // animations: [
+  // trigger('slideInOut', [
+  //   state('in', style({
+  //     transform: 'translate3d(0, 0, 0)'
+  //   })),
+  //   state('out', style({
+  //     transform: 'translate3d(100%, 0, 0)'
+  //   })),
+  //   transition('in => out', animate('400ms ease-in-out')),
+  //   transition('out => in', animate('400ms ease-in-out'))
+  // ])
+// ]
 })
 export class FormBuilderGridComponent implements OnInit {
 
+  public sideBarOpened: boolean = false;
   // public appState: Rx.Observable<AppState>;
 
   // constructor() {
@@ -35,11 +36,8 @@ export class FormBuilderGridComponent implements OnInit {
   ngOnInit() {
   }
 
-  menuState:string = 'out';
-
-  toggleMenu() {
-    // 1-line if statement that toggles the value:
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
+  private toggleSidebar() {
+    this.sideBarOpened = !this.sideBarOpened;
   }
 
   emptyContainer() : boolean {
