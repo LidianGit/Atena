@@ -4,7 +4,7 @@
       <div style="display: none;" id="toggleSidebar" (click)="toggleSidebar()" ><i class="fa fa-bars"></i></div>
       <app-form-component-menu></app-form-component-menu>
     </ng-sidebar>
-    <div class='content container' ng-sidebar-content  >
+    <div class='content container' ng-sidebar-content style="height: 80vh;" >
       <div id="form_builder_container_empty" class="stageEmpty isSmall" (click)="containerElementSelected();toggleSidebar()" *ngIf="emptyContainer()" [dragula]='"bag-items"' [dragulaOptions]="itemsOptions" >
         <span name="enlarge" class="ji ji-enlarge"></span><span>Drag your first component here from the left panel.</span>
       </div>
