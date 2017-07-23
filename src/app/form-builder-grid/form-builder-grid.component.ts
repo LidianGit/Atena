@@ -16,6 +16,7 @@ export class FormBuilderGridComponent implements OnInit {
   public formContainerState: Rx.Observable<FormContainerState>;
 
   constructor(private store: Store<AppState> , private dragulaService: DragulaService) {
+
     dragulaService.drag.subscribe((value) => {
       console.log(`drag: ${value[0]}`);
       this.onDrag(value.slice(1));
@@ -41,13 +42,22 @@ export class FormBuilderGridComponent implements OnInit {
   private onDrag(args) {
     console.log("on drag");
     let [e, el] = args;
+
+
     this.formContainerElementDrag(null);
   }
 
   private onDrop(args) {
-    let [e, el] = args;
-    console.log("on drop");
-    this.formContainerElementDrop(null);
+    let [e, target, source] = args;
+    if( target.id == "removedElementContainer" && source.id == "formContainer"){
+      console.log("on remove element");
+      let bagItems = this.dragulaService.find('bag-items');
+      bagItems.drake.remove();
+      this.formContainerElementRemoved(null);
+    }else if ( target.id == "formContainer" && source.id == "sidebarContainer" ){
+      console.log("on drop element");
+      this.formContainerElementDrop(null);
+    }
   }
 
   private onOver(args) {
@@ -58,16 +68,22 @@ export class FormBuilderGridComponent implements OnInit {
 
   private onOut(args) {
     console.log("on out");
-
     let [e, el, container] = args;
     // do something
   }
-
 
   private toggleSidebar() {
     this.sideBarOpened = !this.sideBarOpened;
   }
 
+
+  public formContainerElementRemoved(formElement : FormElement) {
+    console.log("form element remove dispatch");
+    this.store.dispatch({
+      type: ACTIONS.CONTAINER_ELEMENT_REMOVED,
+      payload: formElement,
+    })
+  }
 
   public formContainerElementDrag(formElement : FormElement) {
     console.log("form element drag dispatch");
@@ -95,9 +111,13 @@ export class FormBuilderGridComponent implements OnInit {
 
   itemsOptions: any = {
     accepts: function (el, target, source, sibling) {
-      return ( target.id == "formContainer" ) && source.id == "sidebar_container";
+      let sideBarToForm: boolean = ( target.id == "formContainer" && source.id == "sidebarContainer" );
+      let formToTrash: boolean = ( target.id == "removedElementContainer" && source.id == "formContainer" );
+      return sideBarToForm || formToTrash;
     },
-    copy: true
+    copy: function (el, source) {
+      return source.id == "sidebarContainer";
+    }
   }
 
 }

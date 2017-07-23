@@ -10,13 +10,16 @@
         <span>Drop elements here</span>
         <i class="fa fa-arrow-down" aria-hidden="true"></i>
       </div>
-      <div class="formContainerHelp red" *ngIf="(formContainerState | async).showTrashCan" >
-        <i class="fa fa-remove " aria-hidden="true"></i>
-        <span>Remove element</span>
-        <i class="fa fa-remove " aria-hidden="true"></i>
+      <div id="removedElementContainer" [dragula]='"bag-items"' style="display: block;" class="formContainerHelp red" *ngIf="(formContainerState | async).showTrashCan" >
+        <div>
+          <i class="fa fa-remove " aria-hidden="true"></i>
+          <span>Remove element</span>
+          <i class="fa fa-remove " aria-hidden="true"></i>
+        </div>
       </div>
       <div class='content container'>
-        <div  id="formContainer" class="formContainer" (click)="containerElementSelected();toggleSidebar()"  [dragula]='"bag-items"' [dragulaOptions]="itemsOptions" >
+        <div  id="formContainer" class="formContainer" (click)="containerElementSelected();toggleSidebar()"
+              [dragula]='"bag-items"' [dragulaOptions]="itemsOptions" dragula-model="(formContainerState | async).form.elements" >
         </div>
       </div>
     </div>

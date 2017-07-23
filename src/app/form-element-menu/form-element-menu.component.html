@@ -5,7 +5,7 @@
     <div class="fieldsPanel-headerText" style="line-height: 2;"><span >Form Elements</span></div>
   </div>
 </div>
-<div id="sidebar_container"  [dragula]='"bag-items"'  [dragulaOptions]="sidebarOptions" >
+<div id="sidebarContainer"  [dragula]='"bag-items"'  [dragulaOptions]="sidebarOptions" >
   <div *ngFor="let formElement of formElementMenuState | async">
     <app-form-element [element]="formElement" ></app-form-element>
   </div>

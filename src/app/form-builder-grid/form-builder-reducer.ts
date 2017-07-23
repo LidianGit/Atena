@@ -48,6 +48,9 @@ export function formContainerReducer(
       return Object.assign({}, state, {showTrashCan: true});
     case ACTIONS.CONTAINER_ELEMENT_DROP:
       return Object.assign({}, state, {showTrashCan: false});
+    case ACTIONS.CONTAINER_ELEMENT_REMOVED:
+      //TODO manage element in form state
+      return Object.assign({}, state, {showTrashCan: false});
     default:
       return state;
   }
