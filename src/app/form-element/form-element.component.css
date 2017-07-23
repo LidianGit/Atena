@@ -1,17 +1,38 @@
 .formElement{
-  min-width: 200px;
-  max-width: 200px;
+  width: 100%;
   min-height: 40px;
   text-align: center;
-  border: 3px dashed;
-  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   cursor: move;
-  /*display: inline-block;*/
+  display: inline-flex;
+  border-bottom: 3px solid #f5f5f5;
+  background: #a1a4ff;
 }
 
-.element_label span{
+.formElement_label span{
   display: inline-block;
   vertical-align: middle;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.formElement_icon{
+  margin-left: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.formElement:hover{
+  background: #ff7513;
+  opacity: 1;
+}
+
+.formElement_input{
+  background: darkturquoise;
+}
+
+.formElement_select{
+  background: #e452ff;
 }

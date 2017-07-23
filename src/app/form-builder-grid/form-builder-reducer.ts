@@ -38,8 +38,8 @@ export function formBuilderReducer(
     switch (action.type) {
         case ACTIONS.CONTAINER_ELEMENT_SELECTED:
           let newElementMenuState = [];
-          let fe1:FormElement = { name: "Input", type: "input" };
-          let fe2:FormElement = { name: "Select", type: "select" };
+          let fe1:FormElement = { name: "Input", type: "input", icon: 'fa-pencil-square-o' };
+          let fe2:FormElement = { name: "Select", type: "select", icon: 'fa-list-ul' };
           newElementMenuState.push(fe1);
           newElementMenuState.push(fe2);
           // return Object.assign({}, state, {elementMenuState: newElementMenuState});

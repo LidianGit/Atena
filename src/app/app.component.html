@@ -1,26 +1,28 @@
 <div class="flex-container">
   <header>
-    <div class="logo" style="" ></div>
-    <h1>Athena</h1>
-  </header>
-
-
-  <div class="secondaryHeader">
-    <div class="siteNav">
-      <a id="siteNav_id_build" class="siteNav-link isActive">Build</a>
-      <a id="siteNav_id_settings" class="siteNav-link ">Settings</a>
-      <a id="siteNav_id_publish" class="siteNav-link ">Publish</a>
+    <div class="sticky-header header-section ">
+      <div class="header-left">
+        <!--toggle button start-->
+        <button id="showLeftPush" (click)="sidebar.close()" ><i class="fa fa-bars"></i></button>
+        <!--toggle button end-->
+        <!--logo -->
+        <div class="logo">
+          <a href="index.html">
+            <h1>Atena</h1>
+            <span>Form builder</span>
+          </a>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+      <div class="header-right">
+        <div class="clearfix"> </div>
+      </div>
+      <div class="clearfix"> </div>
     </div>
-    <!--<label for="previewSwitch" class="togglePreview hideOnMobile" id="js-previewSwitch">-->
-    <!--</label>-->
-  </div>
-
-
-
+  </header>
   <div class="main" >
     <app-form-builder-grid></app-form-builder-grid>
   </div>
-
   <footer class="footer">Copyright &copy; https://github.com/LidianGit/Atena</footer>
 </div>
 
