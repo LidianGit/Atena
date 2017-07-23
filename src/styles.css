@@ -13,3 +13,5 @@
   color: white;
   min-width: 280px;
 }
+
+button:focus {outline:0;}
