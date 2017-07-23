@@ -12,35 +12,35 @@
   margin-bottom: 20px;
   margin-top: 20px;
   background: #fff;
+  display: table;
 }
 
-.cleared {
-  clear: both;
-}
-
-.stageEmpty.isSmall {
-  padding: 45px 20px;
+.formContainer{
   line-height: 36px;
   color: rgba(0,0,0,.3);
   border-color: rgba(0,0,0,.15);
   background-color: rgba(0,0,0,.03);
   border-radius: 10px;
-}
-
-.stageEmpty {
-  margin: 20px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  display: block;
   border: 2px dashed rgba(0,0,0,.15);
-  padding: 60px 0;
-  text-align: center;
-  cursor: default;
-  color: rgba(0,0,0,.2);
-  /*font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;*/
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  display: inline-block;
+  min-height: 300px;
 }
 
+.formContainer:focus {
+  background: rgba(47, 182, 202, 0.34);
+}
 
+.formContainerHelp{
+  max-width: 250px;
+  background: #ffc253;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 3;
+}

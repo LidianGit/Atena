@@ -56,18 +56,11 @@ h1 {
   font-weight: bold;
 }
 
-/*.logo{*/
-  /*float: left;*/
-  /*min-height: 105px;*/
-  /*min-width: 165px;*/
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
-  /*background: url( '../assets/logo.png' )*/
-/*}*/
-
-
 header {background: white; color:#242751;}
-footer {background: #aaa; color:white;}
+footer {
+  line-height: 3;
+  background: #aaa; color:white;
+}
 
 .nav {background:#eee;}
 .nav ul {

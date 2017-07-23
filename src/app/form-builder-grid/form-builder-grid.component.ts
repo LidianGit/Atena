@@ -54,7 +54,7 @@ export class FormBuilderGridComponent implements OnInit {
 
   itemsOptions: any = {
     accepts: function (el, target, source, sibling) {
-      return ( target.id == "form_builder_container_empty" || target.id == "form_builder_container" ) && source.id == "sidebar_container";
+      return ( target.id == "formContainer" ) && source.id == "sidebar_container";
     },
     copy: true
   }

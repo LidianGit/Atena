@@ -25,8 +25,7 @@
 }
 
 .formElement:hover{
-  background: #ff7513;
-  opacity: 1;
+  background: #ffc253;
 }
 
 .formElement_input{

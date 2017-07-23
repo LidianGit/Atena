@@ -15,3 +15,7 @@
 }
 
 button:focus {outline:0;}
+
+.cleared {
+  clear: both;
+}
