@@ -1,47 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate} from '@angular/animations';
-import {ACTIONS, AppState, FormContainerState, FormElementMenuState} from "./form-builder-reducer";
-import * as Rx from 'rxjs';
+import {Component, OnInit} from "@angular/core";
+import {ACTIONS, AppState, FormContainerState} from "./form-builder-reducer";
 import {Store} from "@ngrx/store";
 import {FormElement} from "../form-element/form-element";
+import {DragulaService} from "ng2-dragula";
+import * as Rx from 'rxjs';
 
 @Component({
   selector: 'app-form-builder-grid',
   templateUrl: './form-builder-grid.component.html',
   styleUrls: ['./form-builder-grid.component.css']
-  // animations: [
-  // trigger('slideInOut', [
-  //   state('in', style({
-  //     transform: 'translate3d(0, 0, 0)'
-  //   })),
-  //   state('out', style({
-  //     transform: 'translate3d(100%, 0, 0)'
-  //   })),
-  //   transition('in => out', animate('400ms ease-in-out')),
-  //   transition('out => in', animate('400ms ease-in-out'))
-  // ])
-// ]
 })
 export class FormBuilderGridComponent implements OnInit {
 
   public sideBarOpened: boolean = false;
-  // public appState: Rx.Observable<AppState>;
+  public formContainerState: Rx.Observable<FormContainerState>;
 
-  // constructor() {
-
-  constructor(private store: Store<AppState> ) {
-    // this.appState = store.select('appState');
+  constructor(private store: Store<AppState> , private dragulaService: DragulaService) {
+    dragulaService.drag.subscribe((value) => {
+      console.log(`drag: ${value[0]}`);
+      this.onDrag(value.slice(1));
+    });
+    dragulaService.drop.subscribe((value) => {
+      console.log(`drop: ${value[0]}`);
+      this.onDrop(value.slice(1));
+    });
+    dragulaService.over.subscribe((value) => {
+      console.log(`over: ${value[0]}`);
+      this.onOver(value.slice(1));
+    });
+    dragulaService.out.subscribe((value) => {
+      console.log(`out: ${value[0]}`);
+      this.onOut(value.slice(1));
+    });
+    this.formContainerState = store.select('formContainerState');
   }
 
   ngOnInit() {
   }
 
+  private onDrag(args) {
+    console.log("on drag");
+    let [e, el] = args;
+    this.formContainerElementDrag(null);
+  }
+
+  private onDrop(args) {
+    let [e, el] = args;
+    console.log("on drop");
+    this.formContainerElementDrop(null);
+  }
+
+  private onOver(args) {
+    console.log("on over");
+    let [e, el, container] = args;
+    // do something
+  }
+
+  private onOut(args) {
+    console.log("on out");
+
+    let [e, el, container] = args;
+    // do something
+  }
+
+
   private toggleSidebar() {
     this.sideBarOpened = !this.sideBarOpened;
   }
 
-  emptyContainer() : boolean {
-    return true;
+
+  public formContainerElementDrag(formElement : FormElement) {
+    console.log("form element drag dispatch");
+    this.store.dispatch({
+      type: ACTIONS.CONTAINER_ELEMENT_DRAG,
+      payload: formElement,
+    })
+  }
+
+  public formContainerElementDrop(formElement : FormElement) {
+    console.log("form element drag dispatch");
+    this.store.dispatch({
+      type: ACTIONS.CONTAINER_ELEMENT_DROP,
+      payload: formElement,
+    })
   }
 
   public containerElementSelected(formElement : FormElement) {
@@ -58,24 +99,5 @@ export class FormBuilderGridComponent implements OnInit {
     },
     copy: true
   }
-
-  // containerOptions: any = {
-  //
-  //     accepts: function (el, target, source, sibling) {
-  //       return true;
-  //     },
-  //
-  //   // accepts: function (el, target, source, sibling) {
-  //   //   return true; // elements can be dropped in any of the `containers` by default
-  //   // },
-  //   moves: function (el, source, handle, sibling) {
-  //     return false; // elements are always draggable by default
-  //   },
-  //   copy: false,
-  //   isContainer: function (el) {
-  //     return true; // only elements in drake.containers will be taken into account
-  //   }
-  // }
-
 
 }

@@ -17,6 +17,7 @@ export interface FormElementMenuState {
 export interface FormContainerState {
   form: Form;
   selectedElement: FormElement;
+  showTrashCan: boolean;
 }
 
 export interface Form {
@@ -24,15 +25,36 @@ export interface Form {
 }
 
 export const ACTIONS = {
-  MENU_ELEMENT_DROP: 'ELEMENT_DROP',
-  MENU_ELEMENT_DRAG: 'ELEMENT_DRAG',
-  MENU_ELEMENT_SELECTED: 'ELEMENT_SELECTED',
-  MENU_ELEMENT_REMOVED: 'ELEMENT_REMOVED',
-  CONTAINER_ELEMENT_SELECTED: 'CONTAINER_ELEMENT_SELECTED'
+  MENU_ELEMENT_DROP: 'MENU_ELEMENT_DROP',
+  MENU_ELEMENT_DRAG: 'MEN_ELEMENT_DRAG',
+  MENU_ELEMENT_SELECTED: 'MENU_ELEMENT_SELECTED',
+  MENU_ELEMENT_REMOVED: 'MENU_ELEMENT_REMOVED',
+  CONTAINER_ELEMENT_SELECTED: 'CONTAINER_ELEMENT_SELECTED',
+  CONTAINER_ELEMENT_DROP: 'CONTAINER_ELEMENT_DROP',
+  CONTAINER_ELEMENT_DRAG: 'CONTAINER_ELEMENT_DRAG',
+  CONTAINER_ELEMENT_REMOVED: 'CONTAINER_ELEMENT_REMOVED',
 };
 
-export function formBuilderReducer(
-  // state: AppState = { elementMenuState: { elements: [], hidden: true} },
+
+export function formContainerReducer(
+  state: FormContainerState = {
+    form: {elements: []},
+    selectedElement: null,
+    showTrashCan: false
+  },
+  action: Action): FormContainerState {
+  switch (action.type) {
+    case ACTIONS.CONTAINER_ELEMENT_DRAG:
+      return Object.assign({}, state, {showTrashCan: true});
+    case ACTIONS.CONTAINER_ELEMENT_DROP:
+      return Object.assign({}, state, {showTrashCan: false});
+    default:
+      return state;
+  }
+}
+
+
+export function formElementMenuReducer(
   state: Array<FormElement> = [] ,
   action: Action): Array<FormElement> {
     switch (action.type) {
@@ -42,10 +64,7 @@ export function formBuilderReducer(
           let fe2:FormElement = { name: "Select", type: "select", icon: 'fa-list-ul' };
           newElementMenuState.push(fe1);
           newElementMenuState.push(fe2);
-          // return Object.assign({}, state, {elementMenuState: newElementMenuState});
           return newElementMenuState;
-          // return Object.assign({}, state, newElementMenuState);
-
         default:
           return state;
     }

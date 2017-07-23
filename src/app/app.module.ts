@@ -10,7 +10,7 @@ import {DragulaModule} from "ng2-dragula";
 import { FormElementMenuComponent } from './form-element-menu/form-element-menu.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormElementComponent } from './form-element/form-element.component';
-import {formBuilderReducer} from "./form-builder-grid/form-builder-reducer";
+import {formElementMenuReducer, formContainerReducer} from "./form-builder-grid/form-builder-reducer";
 import {SidebarModule} from "ng-sidebar";
 
 @NgModule({
@@ -20,7 +20,7 @@ import {SidebarModule} from "ng-sidebar";
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
-    StoreModule.provideStore( { elementMenuState: formBuilderReducer} )
+    StoreModule.provideStore( { elementMenuState: formElementMenuReducer, formContainerState: formContainerReducer} )
   ],
   declarations: [
     AppComponent,

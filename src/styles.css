@@ -27,3 +27,12 @@ button:focus {outline:0;}
   border-radius: 10px;
   display: block;
 }
+
+.yellow{
+  /*background: rgb(255, 232, 144);*/
+  background: #ffc253;
+}
+
+.red{
+  background: #ff0027;
+}
