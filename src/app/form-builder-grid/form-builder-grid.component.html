@@ -1,6 +1,7 @@
 <div class='wrapper'>
   <ng-sidebar-container>
     <ng-sidebar #sidebar [(opened)]="sideBarOpened" mode="push" >
+      <div style="display: none;" id="toggleSidebar" (click)="toggleSidebar()" ><i class="fa fa-bars"></i></div>
       <app-form-component-menu></app-form-component-menu>
     </ng-sidebar>
     <div class='content container' ng-sidebar-content  >
