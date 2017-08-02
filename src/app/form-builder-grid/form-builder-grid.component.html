@@ -5,21 +5,35 @@
       <app-form-component-menu></app-form-component-menu>
     </ng-sidebar>
     <div  ng-sidebar-content style="min-height: 80vh;" >
-      <div class="formContainerHelp yellow" *ngIf="!(formContainerState | async).showTrashCan" >
+
+      <div id="removedElementContainer" class="removedElementContainer"  [dragula]='"bag-items"'  [dragulaOptions]="itemsOptions"
+           [dragulaModel]='(formContainerState | async).removedElements' *ngIf="(formContainerState | async).showTrashCan" >
+        <div *ngFor="let formElement of (formContainerState | async).removedElements let index = index" >
+          <app-form-element [formElement]="formElement" ></app-form-element>
+        </div>
+      </div>
+
+      <div class="formContainerHelp orange" *ngIf="!(formContainerState | async).showTrashCan" >
         <i class="fa fa-arrow-down " aria-hidden="true"></i>
         <span>Drop elements here</span>
         <i class="fa fa-arrow-down" aria-hidden="true"></i>
       </div>
-      <div id="removedElementContainer" [dragula]='"bag-items"' style="display: block;" class="formContainerHelp red" *ngIf="(formContainerState | async).showTrashCan" >
+      <div class="formContainerHelp" *ngIf="(formContainerState | async).showTrashCan">
         <div>
           <i class="fa fa-remove " aria-hidden="true"></i>
           <span>Remove element</span>
           <i class="fa fa-remove " aria-hidden="true"></i>
         </div>
       </div>
+
+
       <div class='content container'>
-        <div  id="formContainer" class="formContainer" (click)="containerElementSelected();toggleSidebar()"
-              [dragula]='"bag-items"' [dragulaOptions]="itemsOptions" dragula-model="(formContainerState | async).form.elements" >
+        <div  id="formContainer" class="formContainer" (click)="formContainerElementSelected();toggleSidebar()"
+              [dragula]='"bag-items"' [dragulaOptions]="itemsOptions"
+              [dragulaModel]='(formContainerState | async).form.elements' >
+            <div *ngFor="let formElement of (formContainerState | async).form.elements; let index = index" >
+              <app-form-element [formElement]="formElement" [index]="index" ></app-form-element>
+            </div>
         </div>
       </div>
     </div>

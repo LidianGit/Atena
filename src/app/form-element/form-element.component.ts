@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormElement} from "./form-element";
+import {FormElement} from './form-element';
 
 @Component({
   selector: 'app-form-element',
@@ -8,11 +8,14 @@ import {FormElement} from "./form-element";
 })
 export class FormElementComponent implements OnInit {
 
-  constructor() { }
+  @Input() formElement: FormElement;
+  @Input() index: number;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
-
-  @Input() element: FormElement;
 
 }
