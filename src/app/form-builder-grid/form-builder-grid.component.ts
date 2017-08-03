@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {FormElement} from '../form-element/form-element';
 import {DragulaService} from 'ng2-dragula';
 import * as Rx from 'rxjs';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-form-builder-grid',
@@ -62,26 +63,26 @@ export class FormBuilderGridComponent implements OnInit {
 
   private onDrag(args) {
     const [e, source] = args;
-    if( source.id === 'formContainer' ) {
+    if ( source.id === 'sidebarContainer' ) {
+      e.firstElementChild.dataset.id = UUID.UUID();
+      console.log('id is:', e.firstElementChild.dataset.id);
+    }
+    if ( source.id === 'formContainer' ) {
       this.formContainerElementDrag(null);
     }
   }
 
   private onDrop(args) {
     const [e, target, source] = args;
-    const formElementType: string = e.firstElementChild.firstElementChild.getAttribute('data-form-element-type');
-    const formElementSourceIndex: number = Number( e.firstElementChild.firstElementChild.getAttribute('data-form-element-index') );
     if ( target != null ) {
       if ( target.id === 'removedElementContainer' && source.id === 'formContainer')  {
-        console.log('on remove element');
+        console.log('on remove element {}', e.firstElementChild.dataset.id);
         // const bagItems = this.dragulaService.find('bag-items');
         // bagItems.drake.remove();
-        this.formContainerElementRemoved(formElementType, formElementSourceIndex);
+        this.formContainerElementRemoved(e.firstElementChild.dataset.id);
       }else if ( target.id === 'formContainer' && source.id === 'sidebarContainer' ) {
-        console.log('on drop element');
-        // const bagItems = this.dragulaService.find('bag-items');
-        // bagItems.drake.remove();
-        this.formContainerElementDrop(formElementType, formElementSourceIndex);
+        console.log('on drop element {}', e.firstElementChild.dataset.id);
+        this.formContainerElementDrop(e.firstElementChild.dataset.id);
       }
     }
   }
@@ -112,35 +113,35 @@ export class FormBuilderGridComponent implements OnInit {
     console.log('on remove model', args);
   }
 
-  public formContainerElementRemoved(formElementType: string, formElementSourceIndex: number) {
+  public formContainerElementRemoved(formElementId: string) {
     console.log('form container element remove dispatch');
     this.store.dispatch({
       type: ACTIONS.CONTAINER_ELEMENT_REMOVED,
-      payload: formElementSourceIndex,
+      payload: formElementId,
     });
   }
 
-  public formContainerElementDrag(formElementType: string) {
+  public formContainerElementDrag(formElementId: string) {
     console.log('form container element drag dispatch');
     this.store.dispatch({
       type: ACTIONS.CONTAINER_ELEMENT_DRAG,
-      payload: formElementType,
+      payload: formElementId,
     });
   }
 
-  public formContainerElementDrop(formElementType: string, formElementSourceIndex: number) {
+  public formContainerElementDrop(formElementId: string) {
     console.log('form container element drag dispatch');
     this.store.dispatch({
       type: ACTIONS.CONTAINER_ELEMENT_DROP,
-      payload: formElementType,
+      payload: formElementId,
     });
   }
 
-  public formContainerElementSelected(formElementType: string) {
+  public formContainerElementSelected(formElementId: string) {
     console.log('form container element selected event dispatch');
     this.store.dispatch({
       type: ACTIONS.CONTAINER_ELEMENT_SELECTED,
-      payload: formElementType,
+      payload: formElementId,
     });
   }
 

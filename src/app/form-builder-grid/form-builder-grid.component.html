@@ -28,11 +28,11 @@
 
 
       <div class='content container'>
-        <div  id="formContainer" class="formContainer" (click)="formContainerElementSelected();toggleSidebar()"
+        <div  id="formContainer" class="formContainer" (dblclick)="formContainerElementSelected();toggleSidebar()"
               [dragula]='"bag-items"' [dragulaOptions]="itemsOptions"
               [dragulaModel]='(formContainerState | async).form.elements' >
             <div *ngFor="let formElement of (formContainerState | async).form.elements; let index = index" >
-              <app-form-element [formElement]="formElement" [index]="index" ></app-form-element>
+              <app-form-element [formElement]="formElement" [index]="index" [attr.data-id]="formElement.id" ></app-form-element>
             </div>
         </div>
       </div>

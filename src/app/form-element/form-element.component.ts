@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormElement} from './form-element';
+import {Store} from '@ngrx/store';
+import {ACTIONS} from './form-element-reducer';
 
 @Component({
   selector: 'app-form-element',
@@ -8,14 +10,20 @@ import {FormElement} from './form-element';
 })
 export class FormElementComponent implements OnInit {
 
-  @Input() formElement: FormElement;
+  @Input() formElement: FormElement<any>;
   @Input() index: number;
 
-  constructor() {
-
+  constructor( private store: Store<FormElement<any>> ) {
   }
 
   ngOnInit() {
+  }
+
+  public editElement() {
+    this.store.dispatch({
+      type: ACTIONS.ELEMENT_EDIT,
+      payload: this.formElement
+    });
   }
 
 }

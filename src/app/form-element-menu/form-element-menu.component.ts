@@ -11,7 +11,7 @@ import {FormElement} from '../form-element/form-element';
 })
 export class FormElementMenuComponent implements OnInit {
 
-  public formElementMenuState: Rx.Observable<Array<FormElement>>;
+  public formElementMenuState: Rx.Observable<Array<FormElement<any>>>;
 
   sidebarOptions: any = {
     accepts: function (el, target, source, sibling) {

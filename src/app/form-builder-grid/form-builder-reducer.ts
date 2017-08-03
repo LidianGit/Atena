@@ -10,19 +10,19 @@ export interface AppState {
 }
 
 export interface FormElementMenuState {
-  elements: Array<FormElement>;
+  elements: Array<FormElement<any>>;
   hidden: boolean;
 }
 
 export interface FormContainerState {
   form: Form;
-  selectedElement: FormElement;
-  removedElements: Array<FormElement>;
+  selectedElement: FormElement<any>;
+  removedElements: Array<FormElement<any>>;
   showTrashCan: boolean;
 }
 
 export interface Form {
-  elements: Array<FormElement>;
+  elements: Array<FormElement<any>>;
 }
 
 export const ACTIONS = {
@@ -38,8 +38,23 @@ export const ACTIONS = {
 };
 
 export const ELEMENT_TYPE_VIEW = {
-  input : { name: 'Input', type: 'input', icon: 'fa-pencil-square-o' },
-  select : { name: 'Select', type: 'select', icon: 'fa-list-ul' }
+  input : { id: '',
+            name: 'Input',
+            type: 'input',
+            icon: 'fa-pencil-square-o',
+            editable: false,
+            deletable: false,
+            editMode: false,
+            data: {}},
+  select : {
+            id: '',
+            name: 'Select',
+            type: 'select',
+            icon: 'fa-list-ul',
+            editable: false,
+            deletable: false,
+            editMode: false,
+            data: {}}
 };
 
 export function formContainerReducer(
@@ -56,6 +71,10 @@ export function formContainerReducer(
     case ACTIONS.CONTAINER_ELEMENT_DRAG_CANCEL:
       return Object.assign({}, state, {showTrashCan: false});
     case ACTIONS.CONTAINER_ELEMENT_DROP:
+      const formElementId: string = action.payload;
+      const formElement: FormElement<any> = state.form.elements.find(value => value.id === formElementId );
+      formElement.editable = true;
+      formElement.deletable = true;
       return Object.assign({}, state, {showTrashCan: false});
     case ACTIONS.CONTAINER_ELEMENT_REMOVED:
       const removedElements = [];
@@ -73,13 +92,13 @@ export function recreateFormState(state: FormContainerState) {
 
 
 export function formElementMenuReducer(
-  state: Array<FormElement> = [] ,
-  action: Action): Array<FormElement> {
+  state: Array<FormElement<any>> = [] ,
+  action: Action): Array<FormElement<any>> {
     switch (action.type) {
         case ACTIONS.CONTAINER_ELEMENT_SELECTED:
           const newElementMenuState = [];
-          const fe1: FormElement = ELEMENT_TYPE_VIEW['input'];
-          const fe2: FormElement = ELEMENT_TYPE_VIEW['select'];
+          const fe1: FormElement<any> = ELEMENT_TYPE_VIEW['input'];
+          const fe2: FormElement<any> = ELEMENT_TYPE_VIEW['select'];
           newElementMenuState.push(fe1);
           newElementMenuState.push(fe2);
           return newElementMenuState;

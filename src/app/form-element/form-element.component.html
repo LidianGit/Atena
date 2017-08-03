@@ -4,3 +4,8 @@
   <i class="formElement_icon fa {{formElement.icon}} fa-2x"></i>
   <div id="form_element_name" class="formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
 </div>
+<div (click)="editElement()" *ngIf="formElement.editable" >Edit</div>
+<p-dialog header="Title" [(visible)]="formElement.editMode">
+  Content
+</p-dialog>
+
