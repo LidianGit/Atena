@@ -1,11 +1,25 @@
-<div class="formElement formElement_{{formElement.type}}"
+<div class="formElement formElement_{{formElement.type}} ui-inputgroup"
      [attr.data-form-element-index]="index"
      [attr.data-form-element-type]="formElement.type" >
-  <i class="formElement_icon fa {{formElement.icon}} fa-2x"></i>
-  <div id="form_element_name" class="formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
+  <span class="formElement_icon ui-inputgroup-addon"><i class="fa {{formElement.icon}}" style="font-size: 22px; margin-top: 5px;"></i></span>
+  <div id="form_element_name" class="ui-inputgroup-addon formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
 </div>
 <div (click)="editElement()" *ngIf="formElement.editable" >Edit</div>
-<p-dialog header="Title" [(visible)]="formElement.editMode">
-  Content
+<p-dialog [(visible)]="formElement.editMode"
+          [responsive]="true"
+          [resizable]="false"
+          [draggable]="false"
+          [modal]="true"
+          dismissableMask="true"
+          [closable]="false"
+          width="500" >
+
+  <p-header>
+    Edit {{formElement.type}}
+  </p-header>
+  <app-form-element-data [data]="formElement.data" ></app-form-element-data>
+  <p-footer>
+    <button pButton type="button" (click)="submitEdit()" icon="fa-check" iconPos="right" label="Submit"></button>
+  </p-footer>
 </p-dialog>
 

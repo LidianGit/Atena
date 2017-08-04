@@ -5,9 +5,10 @@
 
 
 .ng-sidebar{
-  background-color: #4F52BA;
+  background-color: transparent;
   color: white;
   min-width: 280px;
+  z-index: 1000 !important;
 }
 
 .ng-sidebar__content{

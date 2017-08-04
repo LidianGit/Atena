@@ -26,4 +26,11 @@ export class FormElementComponent implements OnInit {
     });
   }
 
+  public submitEdit() {
+    this.store.dispatch({
+      type: ACTIONS.ELEMENT_EDIT_SUBMIT,
+      payload: this.formElement
+    });
+  }
+
 }

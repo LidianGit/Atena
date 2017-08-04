@@ -6,6 +6,7 @@ import {FormElement} from '../form-element/form-element';
 
 export const ACTIONS = {
   ELEMENT_EDIT: 'ELEMENT_EDIT',
+  ELEMENT_EDIT_SUBMIT: 'ELEMENT_EDIT_SUBMIT',
 };
 
 export function formContainerElementReducer(
@@ -20,10 +21,13 @@ export function formContainerElementReducer(
     data: {}
   },
   action: Action): FormElement<any> {
+  const formElement: FormElement<any> = action.payload;
   switch (action.type) {
     case ACTIONS.ELEMENT_EDIT:
-      const formElement: FormElement<any> = action.payload;
       formElement.editMode = true;
+      return formElement;
+    case ACTIONS.ELEMENT_EDIT_SUBMIT:
+      formElement.editMode = false;
       return formElement;
     default:
       return state;

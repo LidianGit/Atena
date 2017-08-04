@@ -1,0 +1,15 @@
+<div *ngFor="let dataAttribute of arrayData" >
+  <div ngSwitch="dataAttribute.type" >
+      <div *ngSwitchDefault="" >
+
+
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon" style="min-width: 50%;">{{dataAttribute.key}}</span>
+          <input id="{{dataAttribute.key}}"
+                 placeholder="Insert a value"
+                 pInputText
+                 ngModel="dataAttribute.value" />
+        </div>
+      </div>
+  </div>
+</div>

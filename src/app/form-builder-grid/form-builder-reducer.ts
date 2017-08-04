@@ -45,7 +45,10 @@ export const ELEMENT_TYPE_VIEW = {
             editable: false,
             deletable: false,
             editMode: false,
-            data: {}},
+            data: [
+              {type: 'input', key: 'name',  value: 'Default value' },
+              {type: 'input', key: 'disabled',  value: 'Default value 2' }
+            ]},
   select : {
             id: '',
             name: 'Select',
@@ -54,7 +57,11 @@ export const ELEMENT_TYPE_VIEW = {
             editable: false,
             deletable: false,
             editMode: false,
-            data: {}}
+            data: [
+              {type: 'input', key: 'name',  value: 'default value' },
+              {type: 'input', key: 'disabled',  value: 'false' },
+              {type: 'input', key: 'allowedValues',  value: ''}
+            ]}
 };
 
 export function formContainerReducer(

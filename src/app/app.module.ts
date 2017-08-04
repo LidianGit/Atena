@@ -14,6 +14,7 @@ import {formElementMenuReducer, formContainerReducer} from './form-builder-grid/
 import {SidebarModule} from 'ng-sidebar';
 import {ButtonModule, ConfirmDialogModule, DialogModule, InputTextModule} from 'primeng/primeng';
 import {formContainerElementReducer} from './form-element/form-element-reducer';
+import { FormElementDataComponent } from './form-element-data/form-element-data.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {formContainerElementReducer} from './form-element/form-element-reducer';
     AppComponent,
     FormBuilderGridComponent,
     FormElementMenuComponent,
-    FormElementComponent
+    FormElementComponent,
+    FormElementDataComponent
   ],
   bootstrap: [AppComponent],
   providers: [],
