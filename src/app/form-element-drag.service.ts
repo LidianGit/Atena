@@ -48,23 +48,18 @@ export class FormElementDragService {
     }
     this.initialized = true;
     this.drag = this.dragulaService.drag.subscribe((value) => {
-      console.log(`drag: ${value[0]}`);
       container.onDrag(value.slice(1));
     });
     this.drop = this.dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
       container.onDrop(value.slice(1));
     });
     this.over = this.dragulaService.over.subscribe((value) => {
-      console.log(`over: ${value[0]}`);
       container.onOver(value.slice(1));
     });
     this.out = this.dragulaService.out.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
       container.onOut(value.slice(1));
     });
     this.cancel = this.dragulaService.cancel.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
       container.onCancel(value.slice(1));
     });
     this.dropModel = this.dragulaService.dropModel.subscribe((value) => {
