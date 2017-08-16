@@ -6,5 +6,7 @@ export interface FormElement<T> {
   editable: boolean;
   deletable: boolean;
   editMode: boolean;
+  isContainer: boolean;
+  selected: boolean;
   data: T;
 }

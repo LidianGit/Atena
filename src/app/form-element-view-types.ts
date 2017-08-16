@@ -1,0 +1,70 @@
+export const ELEMENT_TYPE_VIEW = {
+  empty: {
+    id: '',
+    name: 'Dummy',
+    type: 'empty',
+    icon: '',
+    editable: false,
+    deletable: false,
+    editMode: false,
+    isContainer: false,
+    selected: false,
+    elements: [],
+    data: []
+  },
+  form: {
+    id: '',
+    name: 'Form',
+    type: 'form',
+    icon: 'fa-pencil-square-o',
+    editable: false,
+    deletable: false,
+    editMode: false,
+    isContainer: true,
+    isEmpty: true,
+    selected: false,
+    elements: [],
+    data: []
+  },
+  step: { id: '',
+    name: 'Step',
+    type: 'step',
+    icon: 'fa-pencil-square-o',
+    editable: false,
+    deletable: false,
+    editMode: false,
+    isContainer: true,
+    isEmpty: true,
+    selected: false,
+    elements: [],
+    data: []
+  },
+  input : { id: '',
+    name: 'Input',
+    type: 'input',
+    icon: 'fa-pencil-square-o',
+    editable: false,
+    deletable: false,
+    editMode: false,
+    isContainer: false,
+    selected: false,
+    data: [
+      {type: 'input', key: 'name',  value: 'Default value' },
+      {type: 'input', key: 'disabled',  value: 'Default value 2' }
+    ]},
+  select : {
+    id: '',
+    name: 'Select',
+    type: 'select',
+    icon: 'fa-list-ul',
+    editable: false,
+    deletable: false,
+    editMode: false,
+    isContainer: false,
+    selected: false,
+    data: [
+      {type: 'input', key: 'name',  value: 'default value' },
+      {type: 'input', key: 'disabled',  value: 'false' },
+      {type: 'input', key: 'allowedValues',  value: ''}
+    ]}
+};

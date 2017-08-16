@@ -1,0 +1,21 @@
+<div [ngClass]="{'formElementContainerSelected': formElementContainer.selected}" class="formElementContainer" (click)="formElementSelected(formElementContainer, $event);" >
+  <div id="form_element_container_name" class="formElement_label" style="line-height: 2;" ><span>{{formElementContainer.name}}</span></div>
+  <div  id="formContainer_{{formElementContainer.id}}"
+        class="formContainer"
+        [dragula]='"bag-items"'
+        [dragulaOptions]="itemsOptions"
+        [dragulaModel]='formElementContainer.elements'
+        [attr.data-selected]="formElementContainer.selected"
+        *ngIf="formElementContainer.selected" >
+    <div *ngFor="let formElement of formElementContainer.elements" >
+      <app-form-element  [formElement]="formElement" [view]="'form'" [attr.data-id]="formElement.id" ></app-form-element>
+    </div>
+  </div>
+  <div id="formContainer_{{formElementContainer.id}}_unselected"
+       class="formContainer"
+       *ngIf="!formElementContainer.selected">
+    <div *ngFor="let formElement of formElementContainer.elements" >
+      <app-form-element  [formElement]="formElement" [view]="'form'" [attr.data-id]="formElement.id" ></app-form-element>
+    </div>
+  </div>
+</div>

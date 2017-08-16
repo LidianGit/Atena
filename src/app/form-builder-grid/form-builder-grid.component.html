@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div class="formContainerHelp orange" *ngIf="!(formContainerState | async).showTrashCan" >
+      <div class="formContainerHelp" *ngIf="!(formContainerState | async).showTrashCan" >
         <i class="fa fa-arrow-down " aria-hidden="true"></i>
         <span>Drop elements here</span>
         <i class="fa fa-arrow-down" aria-hidden="true"></i>
@@ -28,13 +28,17 @@
 
 
       <div class='content container'>
-        <div  id="formContainer" class="formContainer" (dblclick)="formContainerElementSelected();toggleSidebar()"
+        <app-form-element-container [formElementContainer]="(formContainerState | async).form" ></app-form-element-container>
+
+        <!--
+        <div  id="formContainer_root" class="formContainer" (dblclick)="formContainerElementSelected('');toggleSidebar()"
               [dragula]='"bag-items"' [dragulaOptions]="itemsOptions"
               [dragulaModel]='(formContainerState | async).form.elements' >
             <div *ngFor="let formElement of (formContainerState | async).form.elements; let index = index" >
-              <app-form-element [formElement]="formElement" [index]="index" [attr.data-id]="formElement.id" ></app-form-element>
+              <app-form-element (click)="formContainerElementSelected(formElement.type)" [formElement]="formElement" [view]="'form'" [attr.data-id]="formElement.id" ></app-form-element>
             </div>
         </div>
+        -->
       </div>
     </div>
   </ng-sidebar-container>

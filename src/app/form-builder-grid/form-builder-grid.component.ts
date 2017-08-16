@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ACTIONS, AppState, FormContainerState} from './form-builder-reducer';
+import {AppState, FormContainerState} from './form-builder-reducer';
 import {Store} from '@ngrx/store';
-import {FormElement} from '../form-element/form-element';
 import {DragulaService} from 'ng2-dragula';
 import * as Rx from 'rxjs';
-import {UUID} from 'angular2-uuid';
+import {FormElementHierarchyService} from '../form-element-hierarchy.service';
+import {ACTIONS} from '../form-element-actions';
 
 @Component({
   selector: 'app-form-builder-grid',
@@ -15,140 +15,25 @@ export class FormBuilderGridComponent implements OnInit {
 
   public sideBarOpened = false;
   public formContainerState: Rx.Observable<FormContainerState>;
+  private formElementHierarchyService: FormElementHierarchyService;
 
-  public itemsOptions: any = {
-    accepts: function (el, target, source, sibling) {
-      const sideBarToForm: boolean = ( target.id === 'formContainer' && source.id === 'sidebarContainer' );
-      const formToTrash: boolean = ( target.id === 'removedElementContainer' && source.id === 'formContainer' );
-      return sideBarToForm || formToTrash;
-    },
-    copy: function (el, source) {
-      return source.id === 'sidebarContainer';
-    }
-  };
+  constructor(private store: Store<AppState> ,
+              private dragulaService: DragulaService,
+              formElementHierarchyService: FormElementHierarchyService) {
 
-  constructor(private store: Store<AppState> , private dragulaService: DragulaService) {
-
-    dragulaService.drag.subscribe((value) => {
-      console.log(`drag: ${value[0]}`);
-      this.onDrag(value.slice(1));
-    });
-    dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
-      this.onDrop(value.slice(1));
-    });
-    dragulaService.over.subscribe((value) => {
-      console.log(`over: ${value[0]}`);
-      this.onOver(value.slice(1));
-    });
-    dragulaService.out.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
-      this.onOut(value.slice(1));
-    });
-    dragulaService.cancel.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
-      this.onCancel(value.slice(1));
-    });
-    dragulaService.dropModel.subscribe((value) => {
-      this.onDropModel(value.slice(1));
-    });
-    dragulaService.removeModel.subscribe((value) => {
-      this.onRemoveModel(value.slice(1));
-    });
+    this.formElementHierarchyService = formElementHierarchyService;
     this.formContainerState = store.select('formContainerState');
+
   }
 
   ngOnInit() {
+    this.initNewForm();
   }
 
-  private onDrag(args) {
-    const [e, source] = args;
-    if ( source.id === 'sidebarContainer' ) {
-      e.firstElementChild.dataset.id = UUID.UUID();
-      console.log('id is:', e.firstElementChild.dataset.id);
-    }
-    if ( source.id === 'formContainer' ) {
-      this.formContainerElementDrag(null);
-    }
-  }
-
-  private onDrop(args) {
-    const [e, target, source] = args;
-    if ( target != null ) {
-      if ( target.id === 'removedElementContainer' && source.id === 'formContainer')  {
-        console.log('on remove element {}', e.firstElementChild.dataset.id);
-        // const bagItems = this.dragulaService.find('bag-items');
-        // bagItems.drake.remove();
-        this.formContainerElementRemoved(e.firstElementChild.dataset.id);
-      }else if ( target.id === 'formContainer' && source.id === 'sidebarContainer' ) {
-        console.log('on drop element {}', e.firstElementChild.dataset.id);
-        this.formContainerElementDrop(e.firstElementChild.dataset.id);
-      }
-    }
-  }
-
-  private onOver(args) {
-    console.log('on over');
-    const [e, el, container] = args;
-  }
-
-  private onOut(args) {
-    console.log('on out');
-    const [e, el, container] = args;
-  }
-
-  private onCancel(args) {
-    console.log('on cancel');
-    const [e, el, container] = args;
-    this.formContainerElementCancelDrag();
-  }
-
-  private onDropModel(args) {
-    const [el, target, source] = args;
-    console.log('on drop model', args);
-  }
-
-  private onRemoveModel(args) {
-    const [el, source] = args;
-    console.log('on remove model', args);
-  }
-
-  public formContainerElementRemoved(formElementId: string) {
-    console.log('form container element remove dispatch');
+  public initNewForm() {
+    console.log('form container init new form');
     this.store.dispatch({
-      type: ACTIONS.CONTAINER_ELEMENT_REMOVED,
-      payload: formElementId,
-    });
-  }
-
-  public formContainerElementDrag(formElementId: string) {
-    console.log('form container element drag dispatch');
-    this.store.dispatch({
-      type: ACTIONS.CONTAINER_ELEMENT_DRAG,
-      payload: formElementId,
-    });
-  }
-
-  public formContainerElementDrop(formElementId: string) {
-    console.log('form container element drag dispatch');
-    this.store.dispatch({
-      type: ACTIONS.CONTAINER_ELEMENT_DROP,
-      payload: formElementId,
-    });
-  }
-
-  public formContainerElementSelected(formElementId: string) {
-    console.log('form container element selected event dispatch');
-    this.store.dispatch({
-      type: ACTIONS.CONTAINER_ELEMENT_SELECTED,
-      payload: formElementId,
-    });
-  }
-
-  public formContainerElementCancelDrag() {
-    console.log('form container element drag cancel dispatch');
-    this.store.dispatch({
-      type: ACTIONS.CONTAINER_ELEMENT_DRAG_CANCEL
+      type: ACTIONS.CONTAINER_ELEMENT_INIT_NEW_FORM
     });
   }
 

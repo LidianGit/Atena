@@ -9,7 +9,7 @@ export const ACTIONS = {
   ELEMENT_EDIT_SUBMIT: 'ELEMENT_EDIT_SUBMIT',
 };
 
-export function formContainerElementReducer(
+export function formElementReducer(
   state: FormElement<any> = {
     id: '',
     name: '',
@@ -18,6 +18,8 @@ export function formContainerElementReducer(
     editable: false,
     deletable: false,
     editMode: false,
+    isContainer: false,
+    selected: false,
     data: {}
   },
   action: Action): FormElement<any> {

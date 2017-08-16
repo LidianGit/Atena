@@ -7,6 +7,6 @@
 <div id="sidebarContainer"  [dragula]='"bag-items"'  [dragulaOptions]="sidebarOptions"
      [dragulaModel]='formElementMenuState | async' >
   <div *ngFor="let formElement of formElementMenuState | async">
-    <app-form-element [formElement]="formElement" [attr.data-id]="formElement.id" ></app-form-element>
+    <app-form-element [formElement]="formElement" [attr.data-id]="formElement.id" [view]="'menu'" ></app-form-element>
   </div>
 </div>

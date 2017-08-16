@@ -3,6 +3,7 @@ import {AppState} from '../form-builder-grid/form-builder-reducer';
 import * as Rx from 'rxjs';
 import {Store} from '@ngrx/store';
 import {FormElement} from '../form-element/form-element';
+import {FormElementHierarchyService} from '../form-element-hierarchy.service';
 
 @Component({
   selector: 'app-form-component-menu',
@@ -22,10 +23,8 @@ export class FormElementMenuComponent implements OnInit {
   };
 
 
-  constructor( private store: Store<AppState> ) {
+  constructor( private store: Store<AppState> , formElementHierarchyService: FormElementHierarchyService) {
     this.formElementMenuState = store.select('elementMenuState');
-    // / let mockFreelancer : IFreelancer = { name: "Danilo", email: "miglioredanilo@gmail.com", thumbnail: "X"};
-    //  this.freelancers =  Rx.Observable.of([mockFreelancer]);
   }
 
   ngOnInit() {

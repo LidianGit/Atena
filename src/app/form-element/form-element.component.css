@@ -1,53 +1,24 @@
 
 .formElement{
-  /*width: 100%;
-  min-height: 40px;
-  text-align: center;
-  */
   margin-left: auto;
   margin-right: auto;
   cursor: move;
-  /*
-  display: inline-flex;
-  border-bottom: 3px solid #f5f5f5;
-  background: #a1a4ff;
-  */
 }
-
 
 .formElement_label {
   width: 80%;
   text-align: start;
-  /*
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  */
 }
 
 .formElement_icon{
   width: 20%;
-  /*
-  margin-left: 10px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  */
 }
 
 .formElement:hover{
   background: #ffc253;
 }
 
-/*
-.formElement_input{
-  background: darkturquoise;
+.formContainerformElement{
+  margin-top: 20px;
+  width: 30%;
 }
-
-.formElement_select{
-  background: #e452ff;
-}
-
-*/
-

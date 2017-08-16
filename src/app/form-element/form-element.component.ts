@@ -11,7 +11,7 @@ import {ACTIONS} from './form-element-reducer';
 export class FormElementComponent implements OnInit {
 
   @Input() formElement: FormElement<any>;
-  @Input() index: number;
+  @Input() view: string;
 
   constructor( private store: Store<FormElement<any>> ) {
   }

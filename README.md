@@ -31,6 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 angular 4.0
 angular cli
 dragula
-primeNG
+primeNG ( flick theme )
 fontawesome
 RXjs
+

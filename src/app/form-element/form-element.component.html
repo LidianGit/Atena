@@ -1,25 +1,50 @@
-<div class="formElement formElement_{{formElement.type}} ui-inputgroup"
-     [attr.data-form-element-index]="index"
-     [attr.data-form-element-type]="formElement.type" >
-  <span class="formElement_icon ui-inputgroup-addon"><i class="fa {{formElement.icon}}" style="font-size: 22px; margin-top: 5px;"></i></span>
-  <div id="form_element_name" class="ui-inputgroup-addon formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
+<div *ngIf="view=='menu'" >
+  <div class="formElement formElement_{{formElement.type}} ui-inputgroup"
+       [attr.data-form-element-type]="formElement.type" >
+    <span class="formElement_icon ui-inputgroup-addon"><i class="fa {{formElement.icon}}" style="font-size: 22px; margin-top: 5px;"></i></span>
+    <div id="form_element_menu_{{formElement.type}}" class="ui-inputgroup-addon formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
+  </div>
 </div>
-<div (click)="editElement()" *ngIf="formElement.editable" >Edit</div>
-<p-dialog [(visible)]="formElement.editMode"
-          [responsive]="true"
-          [resizable]="false"
-          [draggable]="false"
-          [modal]="true"
-          dismissableMask="true"
-          [closable]="false"
-          width="500" >
+<div *ngIf="view=='form'" >
+  <div *ngIf="formElement.type ==='empty'">
+    Insert Something!
+  </div>
+  <div *ngIf="formElement.type !='empty'">
+    <div *ngIf="!formElement.isContainer" class="formElement formElement_{{formElement.type}} formContainerformElement ui-inputgroup"
+         [attr.data-form-element-type]="formElement.type" >
+      <span class="formElement_icon ui-inputgroup-addon"><i class="fa {{formElement.icon}}" style="font-size: 22px; margin-top: 5px;"></i></span>
+      <div id="form_element_name_{{formElement.type}}" class="ui-inputgroup-addon formElement_label" style="line-height: 2;"><span>{{formElement.name}}</span></div>
+    </div>
+    <div *ngIf="formElement.isContainer" [attr.data-form-element-type]="formElement.type" class="formElement_{{formElement.type}} " >
+      <app-form-element-container [formElementContainer]="formElement" ></app-form-element-container>
+    </div>
+    <div (click)="editElement()" *ngIf="formElement.editable" >Edit</div>
 
-  <p-header>
-    Edit {{formElement.type}}
-  </p-header>
-  <app-form-element-data [data]="formElement.data" ></app-form-element-data>
-  <p-footer>
-    <button pButton type="button" (click)="submitEdit()" icon="fa-check" iconPos="right" label="Submit"></button>
-  </p-footer>
-</p-dialog>
+    <p-dialog [(visible)]="formElement.editMode"
+              [responsive]="true"
+              [resizable]="false"
+              [draggable]="false"
+              [modal]="true"
+              dismissableMask="true"
+              [closable]="false"
+              width="500" >
+
+      <p-header>
+        Edit {{formElement.type}}
+      </p-header>
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="min-width: 50%;">name</span>
+        <input id="{{formElement.name}}"
+               pInputText
+               [(ngModel)]="formElement.name" />
+      </div>
+      <app-form-element-data [data]="formElement.data" ></app-form-element-data>
+      <p-footer>
+        <button pButton type="button" (click)="submitEdit()" icon="fa-check" iconPos="right" label="Submit"></button>
+      </p-footer>
+    </p-dialog>
+  </div>
+</div>
+
+
 

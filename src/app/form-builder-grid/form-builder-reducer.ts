@@ -3,6 +3,9 @@
  */
 import { Action } from '@ngrx/store';
 import {FormElement} from '../form-element/form-element';
+import {FormElementContainer} from '../form-element-container/form-element-container';
+import {ELEMENT_TYPE_VIEW} from '../form-element-view-types';
+import {ACTIONS} from '../form-element-actions';
 
 export interface AppState {
   formContainerState: FormContainerState;
@@ -15,80 +18,64 @@ export interface FormElementMenuState {
 }
 
 export interface FormContainerState {
-  form: Form;
+  form: FormElementContainer<any>;
   selectedElement: FormElement<any>;
   removedElements: Array<FormElement<any>>;
   showTrashCan: boolean;
 }
 
-export interface Form {
-  elements: Array<FormElement<any>>;
-}
-
-export const ACTIONS = {
-  MENU_ELEMENT_DROP: 'MENU_ELEMENT_DROP',
-  MENU_ELEMENT_DRAG: 'MEN_ELEMENT_DRAG',
-  MENU_ELEMENT_SELECTED: 'MENU_ELEMENT_SELECTED',
-  MENU_ELEMENT_REMOVED: 'MENU_ELEMENT_REMOVED',
-  CONTAINER_ELEMENT_SELECTED: 'CONTAINER_ELEMENT_SELECTED',
-  CONTAINER_ELEMENT_DROP: 'CONTAINER_ELEMENT_DROP',
-  CONTAINER_ELEMENT_DRAG: 'CONTAINER_ELEMENT_DRAG',
-  CONTAINER_ELEMENT_DRAG_CANCEL: 'CONTAINER_ELEMENT_DRAG_CANCEL',
-  CONTAINER_ELEMENT_REMOVED: 'CONTAINER_ELEMENT_REMOVED',
-};
-
-export const ELEMENT_TYPE_VIEW = {
-  input : { id: '',
-            name: 'Input',
-            type: 'input',
-            icon: 'fa-pencil-square-o',
-            editable: false,
-            deletable: false,
-            editMode: false,
-            data: [
-              {type: 'input', key: 'name',  value: 'Default value' },
-              {type: 'input', key: 'disabled',  value: 'Default value 2' }
-            ]},
-  select : {
-            id: '',
-            name: 'Select',
-            type: 'select',
-            icon: 'fa-list-ul',
-            editable: false,
-            deletable: false,
-            editMode: false,
-            data: [
-              {type: 'input', key: 'name',  value: 'default value' },
-              {type: 'input', key: 'disabled',  value: 'false' },
-              {type: 'input', key: 'allowedValues',  value: ''}
-            ]}
-};
-
-export function formContainerReducer(
+export function formContainerStateReducer(
   state: FormContainerState = {
-    form: {elements: []},
+    form: {
+      id: '',
+      name: '',
+      type: '',
+      icon: '',
+      editable: false,
+      deletable: false,
+      editMode: false,
+      isContainer: true,
+      isEmpty: true,
+      selected: false,
+      elements: [],
+      data: []
+    },
     selectedElement: null,
     removedElements: [],
     showTrashCan: false
   },
   action: Action): FormContainerState {
   switch (action.type) {
+    case ACTIONS.CONTAINER_ELEMENT_SELECTED:
+      if ( state.selectedElement != null) {
+        state.selectedElement.selected = false;
+      }
+      const formSelectedElement: FormElement<any> = action.payload.formElement;
+      formSelectedElement.selected = true;
+      return Object.assign({}, state, {selectedElement: formSelectedElement});
+    case ACTIONS.CONTAINER_ELEMENT_INIT_NEW_FORM:
+      const newForm: FormElementContainer<any> = newFormContainerElement('form');
+      newForm.id = 'root';
+      // newForm.selected = true;
+      return Object.assign({}, state, {form: newForm});
+    case ACTIONS.CONTAINER_ELEMENT_REMOVED:
+      const removedElements = [];
+      return Object.assign({}, state, {showTrashCan: false}, {removedElements: removedElements});
     case ACTIONS.CONTAINER_ELEMENT_DRAG:
       return Object.assign({}, state, {showTrashCan: true});
     case ACTIONS.CONTAINER_ELEMENT_DRAG_CANCEL:
       return Object.assign({}, state, {showTrashCan: false});
     case ACTIONS.CONTAINER_ELEMENT_DROP:
-      const formElementId: string = action.payload;
-      const formElement: FormElement<any> = state.form.elements.find(value => value.id === formElementId );
-      formElement.editable = true;
-      formElement.deletable = true;
       return Object.assign({}, state, {showTrashCan: false});
-    case ACTIONS.CONTAINER_ELEMENT_REMOVED:
-      const removedElements = [];
-      return Object.assign({}, state, {showTrashCan: false}, {removedElements: removedElements});
     default:
       return state;
   }
+}
+
+export function newFormContainerElement( elementType: string) {
+  const newContainer: FormElementContainer<any> = ELEMENT_TYPE_VIEW['form'];
+  newContainer.elements.push( ELEMENT_TYPE_VIEW['empty'] );
+  return newContainer;
 }
 
 export function recreateFormState(state: FormContainerState) {
@@ -97,19 +84,23 @@ export function recreateFormState(state: FormContainerState) {
   return form;
 }
 
-
 export function formElementMenuReducer(
   state: Array<FormElement<any>> = [] ,
   action: Action): Array<FormElement<any>> {
-    switch (action.type) {
-        case ACTIONS.CONTAINER_ELEMENT_SELECTED:
-          const newElementMenuState = [];
-          const fe1: FormElement<any> = ELEMENT_TYPE_VIEW['input'];
-          const fe2: FormElement<any> = ELEMENT_TYPE_VIEW['select'];
-          newElementMenuState.push(fe1);
-          newElementMenuState.push(fe2);
-          return newElementMenuState;
-        default:
-          return state;
-    }
+  switch (action.type) {
+    case ACTIONS.CONTAINER_ELEMENT_SELECTED:
+      const allowedFormElementTypes: Array<string> = action.payload.allowedChildren;
+
+      // TODO move to directive?
+      // retrieveConfigByType( formElementType );
+      const newElementMenuState = [];
+      allowedFormElementTypes.forEach( (formElementType, index) => {
+        const fe: FormElement<any> = ELEMENT_TYPE_VIEW[formElementType];
+        fe.id = '' + index;
+        newElementMenuState.push(fe);
+      });
+      return newElementMenuState;
+    default:
+      return state;
+  }
 }
