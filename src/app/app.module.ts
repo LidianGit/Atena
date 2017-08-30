@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormElementComponent } from './form-element/form-element.component';
 import {formContainerStateReducer, formElementMenuReducer} from './form-builder-grid/form-builder-reducer';
 import {SidebarModule} from 'ng-sidebar';
-import {ButtonModule, ConfirmDialogModule, DialogModule, InputTextModule} from 'primeng/primeng';
+import {ButtonModule, ChartModule, ConfirmDialogModule, DialogModule, InputTextModule} from 'primeng/primeng';
 import {formElementReducer} from './form-element/form-element-reducer';
 import { FormElementDataComponent } from './form-element-data/form-element-data.component';
 import {FormElementHierarchyService} from './form-element-hierarchy.service';
@@ -20,6 +20,7 @@ import { FormElementContainerComponent } from './form-element-container/form-ele
 import {formElementContainerReducer} from './form-element-container/form-element-container-reducer';
 import {FormElementDragService} from './form-element-drag.service';
 import {FormsModule, NgModel} from '@angular/forms';
+import { RatemeComponent } from './rateme/rateme.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {FormsModule, NgModel} from '@angular/forms';
     ButtonModule,
     ConfirmDialogModule,
     DialogModule,
-    FormsModule
+    FormsModule,
+    ChartModule
   ],
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import {FormsModule, NgModel} from '@angular/forms';
     FormElementMenuComponent,
     FormElementComponent,
     FormElementDataComponent,
-    FormElementContainerComponent
+    FormElementContainerComponent,
+    RatemeComponent
   ],
   bootstrap: [AppComponent],
   providers: [ FormElementHierarchyService, FormElementDragService ],
